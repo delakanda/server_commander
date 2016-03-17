@@ -15,7 +15,7 @@ class SSHManager {
 		$this->password = $password;
 	}
 
-	public function connect()
+	private function connect()
 	{
 		$this->conn = ssh2_connect($this->host,22);
 		ssh2_auth_password($this -> conn,$this->username, $this->password);

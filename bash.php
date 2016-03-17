@@ -10,10 +10,16 @@ $auth = require 'config/auth.php';
 if(isset($argv[1])) {
 	$arg = $argv[1];
 } else {
-	$arg = null;
+	echo "Argument needed. add with --command=\"[command]\"\n\n";
+	die();
 }
 
+if( strpos($arg, '--command=') === false ) {
+	echo "Argument format invalid. use --command=\"[command]\"\n\n";
+	die();
+}
 
+$command = str_replace("\"","",str_replace("--command=", "", $arg));
 
 foreach($servers as $server) {
 
@@ -23,7 +29,7 @@ foreach($servers as $server) {
 
 	echo "executing on server " . $host . "...\n";
 	$sshMan = new SSHManager($host,$username,$password);
-	$res = $sshMan -> execCommand("cd software && git pull origin master");
+	$res = $sshMan -> execCommand($command);
 	echo $res;
 	echo "\n";
 }
