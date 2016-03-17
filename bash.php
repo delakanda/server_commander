@@ -24,8 +24,16 @@ $command = str_replace("\"","",str_replace("--command=", "", $arg));
 foreach($servers as $server) {
 
 	$host = $server['host'];
-	$username = $server['user'];
-	$password = $server['password'];
+
+	if(isset($server['username']) && isset($server['password'])) {
+		$username = $server['username'];
+		$password = $server['password'];
+	} else {
+		$username = $auth['common_username'];
+		$password = $auth['common_password'];
+	}
+
+
 
 	echo "executing on server " . $host . "...\n";
 	$sshMan = new SSHManager($host,$username,$password);
