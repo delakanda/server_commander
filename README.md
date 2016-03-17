@@ -7,6 +7,6 @@ Most useful in situations where multiple server backends are managed by a proxy 
 
 The program works by calling the bash.php file from the command line:
 
-./bash.php --command="[command]""
+./bash.php --command="[command]"
 
 where [command] is the command to run.
